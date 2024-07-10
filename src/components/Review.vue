@@ -15,12 +15,15 @@
 
 <script setup>
   import {ref} from 'vue'
-  const props = defineProps({maxRating : Number});
+  const props = defineProps(
+    {maxRating : Number},
+    {id: Number},
+  );
   const emits = defineEmits(['add-review', ]);
   const text = defineModel('text');
   const rating = ref(1);
   const addReview = () => {
-    emits('add-review', {id: 4, rating: rating.value, text: text.value});
+    emits('add-review', {id: props.id, rating: rating.value, text: text.value});
     text.value = '';
   }
 

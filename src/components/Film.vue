@@ -1,34 +1,25 @@
-<script>
-import { toRefs, ref } from 'vue';
+<script setup>
+import { ref } from 'vue';
 
+const count = ref(0);
 
-
-export default {
-  props: {
-    film: {
-      type: Object,
-      required: true
-    }
-  },
-  setup(props) {
-    const { film } = toRefs(props);
-    var count = ref(0);
-    //console.log(film);
-    function setCount(num) {
-        this.count = num;
-    }
-    return { film, count, setCount };
-  }, 
-  mounted() {
+const props = defineProps(
+  {
+    filmName : String,
+    required: true,
 
   }
+)
+
+function setCount(num) {
+  count.value = num;
 }
 
 </script>
 
 <template>
     <div class="film_item">
-        {{ film.name }}
+        {{ filmName }}
         <button @click="setCount(count - 1)" :disabled="count === 0">-</button>
         {{ count }}
         <button @click="setCount(count + 1)" :disabled="count > 5">+</button>
